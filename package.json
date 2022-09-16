@@ -16,10 +16,12 @@
     "url": "https://github.com/TeamWildWest/node-red-contrib-rtsp2img/issues"
   },
   "homepage": "https://github.com/TeamWildWest/node-red-contrib-rtsp2img#readme",
-  "node-red" : {
+  "node-red": {
     "nodes": {
-        "rtsp2img": "Rtsp2img.js"
+      "rtsp2img": "Rtsp2img.js"
     }
-}
-
+  },
+  "dependencies": {
+    "node-rtsp-stream": "^0.0.9"
+  }
 }

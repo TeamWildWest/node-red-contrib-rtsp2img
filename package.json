@@ -1,0 +1,25 @@
+{
+  "name": "node-red-contrib-rtsp2img",
+  "version": "1.0.0",
+  "description": "Capture frame from rtsp stream",
+  "main": "Rtsp2img.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TeamWildWest/node-red-contrib-rtsp2img.git"
+  },
+  "author": "wasiwasi",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/TeamWildWest/node-red-contrib-rtsp2img/issues"
+  },
+  "homepage": "https://github.com/TeamWildWest/node-red-contrib-rtsp2img#readme",
+  "node-red" : {
+    "nodes": {
+        "rtsp2img": "Rtsp2img.js"
+    }
+}
+
+}

@@ -60,7 +60,7 @@ module.exports.code = (config) => {
             sendFrameInterval = setInterval(() => {
                 this.dataURL = inputCanvas.toDataURL("image/png");
                 dataWebSocket.send(JSON.stringify({ id: id++, data: this.dataURL}));
-            }, 100);
+            }, 1000 / ${config.fps});
           }
 
           function handleStop() {

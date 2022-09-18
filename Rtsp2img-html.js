@@ -8,6 +8,7 @@ module.exports.code = (config) => {
           <meta http-equiv="X-UA-Compatible" content="IE=edge">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <script src="https://jsmpeg.com/jsmpeg.min.js"></script>
+          <script src="https://cdn.socket.io/4.5.0/socket.io.min.js" integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k" crossorigin="anonymous"></script>
           <title>RTSP to Img frame</title>
       </head>
       
@@ -19,7 +20,9 @@ module.exports.code = (config) => {
           </div>
         </div>
         <div>
-          <button id="captureBtn">capture stream</button>
+          <button id="startBtn">Start capturing</button>
+          <button id="stopBtn">Stop capturing</button>
+          <button id="captureBtn">capture</button>
         </div>
       </body>
       
@@ -27,25 +30,44 @@ module.exports.code = (config) => {
       
       <script type="module">
           window.onload = function() {
-            document.getElementById("captureBtn").addEventListener("click", handleClick);
+            document.getElementById("startBtn").addEventListener("click", handleStart);
+            document.getElementById("stopBtn").addEventListener("click", handleStop);
+            document.getElementById("captureBtn").addEventListener("click", handleCapture);
           }
 
           const inputCanvas = document.getElementById('input-canvas')
-          
-          player = new JSMpeg.Player('ws://localhost:9999', {
+          const dataWebSocket = new WebSocket('${config.dataWsURL}')
+
+          const player = new JSMpeg.Player('ws://localhost:9999', {
             canvas: inputCanvas,
             preserveDrawingBuffer : true
           })	
-        
-          function handleClick() {
 
+          let sendFrameInterval;
+
+          function handleCapture() {
             const dataURL = inputCanvas.toDataURL("image/png");
             const a = document.createElement("a");
             a.href = dataURL;
             a.download = "capture.png";
-            console.log(dataURL);
             a.click();
           }
+
+          function handleStart() {
+            let dataURL;
+            let id = 1;
+
+            sendFrameInterval = setInterval(() => {
+                this.dataURL = inputCanvas.toDataURL("image/png");
+                dataWebSocket.send(JSON.stringify({ id: id++, data: this.dataURL}));
+            }, 100);
+          }
+
+          function handleStop() {
+              clearInterval(sendFrameInterval);
+              alert("정지");
+          }
+          
       </script>
       `;
 };

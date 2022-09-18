@@ -1,13 +1,18 @@
 <script type="text/javascript">
   RED.nodes.registerType("rtsp2img", {
     category: "function",
-    color: "#a6bbcf",
+    color: "#FFAAAA",
     defaults: {
       name: { value: "" },
+      rtspURL: { value: "" },
+    },
+    credentials: {
+      smartthingsMnid: { value: "" },
+      smartthingsPat: { value: "" },
     },
     inputs: 1,
     outputs: 1,
-    icon: "",
+    icon: "bridge.svg",
     label: function () {
       return this.name || "rtsp2img";
     },
@@ -15,9 +20,42 @@
 </script>
 
 <script type="text/html" data-template-name="rtsp2img">
+  <div class="form-tips" style="margin-bottom:10px;">
+    <b>Note:</b> You can check your SmartThings MNID on
+    <b
+      ><a
+        href="https://smartthings.developer.samsung.com/partner/dashboard"
+        target="_blank"
+        >this page</a
+      >.</b
+    >
+    And you can also generate your SmartThings Personal Access Token(PAT) on
+    <b
+      ><a href="https://account.smartthings.com/tokens" target="_blank"
+        >this page</a
+      >.</b
+    >
+  </div>
+
   <div class="form-row">
     <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
     <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-rtspURL"><i class="fa fa-tag"></i> rtspURL</label>
+    <input type="text" id="node-input-rtspURL" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-smartthingsMnid"
+      ><i class="fa fa-tag"></i> SmartThings MNID</label
+    >
+    <input type="text" id="node-input-smartthingsMnid" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-smartthingsPat"
+      ><i class="fa fa-tag"></i> SmartThings PAT</label
+    >
+    <input type="text" id="node-input-smartthingsPat" />
   </div>
 </script>
 
